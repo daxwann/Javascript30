@@ -31,29 +31,65 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const filterList = inventors.filter(inventor => {
+      return inventor.year >= 1500 && inventor.year < 1600;
+    });
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const fullNames = inventors.map(inventor => {
+      return `${inventor.first} ${inventor.last}`;
+    });
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortedByBday = inventors.sort((a, b) => {
+      if (a.year < b.year)
+        return -1;
+      else if (a.year > b.year)
+        return 1;
+      else
+        return 0;
+    });
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalAge = inventors.reduce((total, inventor) => {
+      return total += inventor.passed - inventor.year;
+    }, 0);
 
     // 5. Sort the inventors by years lived
+    function findAge(person) {
+      return person.passed - person.year;
+    }
 
+    const sortByAge = inventors.sort((a, b) => {
+      ageA = findAge(a);
+      ageB = findAge(b);
+      if (ageA < ageB)
+        return -1
+      else if (ageA > ageB)
+        return 1
+      else
+        return 0
+    });
+    
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
+    const domList = document.querySelectorAll(".mw-category-group ul li a");
+    const deList = [];
+    domList.forEach(a => {
+      if (a.outerText.match(/de/i))
+        deList.push(a.outerText);
+    });
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
-    // 8. Reduce Exercise
-    // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
-  </script>
+    const sortedByLastName = people.sort((a, b) => {
+      nameA = a.match(/^\w/)[0].toLowerCase();
+      nameB = b.match(/^\w/)[0].toLowerCase();
+      
+      return nameA < nameB ? -1 : 1;
+    });
+// 8. Reduce Exercise // Sum up the instances of each of these const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ]; </script>
 </body>
 </html>
