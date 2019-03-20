@@ -90,6 +90,15 @@
       
       return nameA < nameB ? -1 : 1;
     });
-// 8. Reduce Exercise // Sum up the instances of each of these const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ]; </script>
+// 8. Reduce Exercise // Sum up the instances of each of these 
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ]; 
+    const instances = data.reduce((hash, instance) => {
+      if (hash[instance])
+        hash[instance] += 1;
+      else
+        hash[instance] = 1;
+      return hash;
+    }, {});
+  </script>
 </body>
 </html>
