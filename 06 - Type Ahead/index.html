@@ -36,6 +36,13 @@ function findMatches(wordToMatch, cities) {
 
 function displayMatches() {
   const matchArray = findMatches(this.value, cities);
+
+  if (this.value == "") {
+    suggestions.innerHTML = `
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    `; 
+  } else {
   const html = matchArray.map(place => {
     return `
       <li>
@@ -46,11 +53,12 @@ function displayMatches() {
   }).join('');
 
   suggestions.innerHTML = html;
+  }
 }
 
 function highlightMatched(wordToMatch, matchedPlace) {
   const regex = new RegExp(wordToMatch, 'gi');
-  return matchedPlace.replace(regex, `<span class="hl">${regex.source}</span>`);
+  return matchedPlace.replace(regex, `<span class="hl">${wordToMatch}</span>`);
 }
 
 function numberWithCommas(num) {
