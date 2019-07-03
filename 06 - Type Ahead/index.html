@@ -39,13 +39,22 @@ function displayMatches() {
   const html = matchArray.map(place => {
     return `
       <li>
-        <span class="name">${place.city}, ${place.state}</span>
-        <span class="population">${place.population}</span>
+        <span class="name">${highlightMatched(this.value, place.city)}, ${highlightMatched(this.value, place.state)}</span>
+        <span class="population">${numberWithCommas(place.population)}</span>
       </li>
     `;
   }).join('');
 
   suggestions.innerHTML = html;
+}
+
+function highlightMatched(wordToMatch, matchedPlace) {
+  const regex = new RegExp(wordToMatch, 'gi');
+  return matchedPlace.replace(regex, `<span class="hl">${regex.source}</span>`);
+}
+
+function numberWithCommas(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 </script>
